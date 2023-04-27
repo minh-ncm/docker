@@ -46,7 +46,25 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - runner:/etc/gitlab-runner
-      
+
+  # Jenkins
+  jenkins:
+    container_name: my_jenkins
+    build:
+      context: .
+      dockerfile: dockerfile/jenkins
+    image: my_jenkins
+    restart: always
+    volumes:
+      - jenkins:/var/jenkins_home/
+      - jenkins:/certs/client:ro
+    environment:
+      - DOCKER_HOST=tcp://docker:2376
+      - DOCKER_CERT_PATH=/cert/client
+      - DOCKER_TLS_VERIFY=1
+    ports:
+      - ${JENKINS_PORT}:2376
+
   # ELK stack
   setup:
     image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
@@ -300,6 +318,8 @@ volumes:
   redis:
     driver: local
   runner:
+    driver: local
+  jenkins:
     driver: local
   certs:
     driver: local
