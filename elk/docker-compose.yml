@@ -232,17 +232,17 @@ services:
       timeout: 10s
       retries: 120
 
-  filebeat:
-    depends_on:
-      es01:
-        condition: service_healthy
-    image: docker.elastic.co/beats/filebeat:${STACK_VERSION}
-    container_name: my_filebeat
-    volumes:
-      - ./conf_filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
-    environment:
-      - setup.kibana=my_kibana:${KIBANA_PORT}
-      - output.elasticsearch.hosts=["my_elastic01:${ELASTIC_PORT}"]
+  # filebeat:
+  #   depends_on:
+  #     es01:
+  #       condition: service_healthy
+  #   image: docker.elastic.co/beats/filebeat:${STACK_VERSION}
+  #   container_name: my_filebeat
+  #   volumes:
+  #     - ./conf_filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+  #   environment:
+  #     - setup.kibana=my_kibana:${KIBANA_PORT}
+  #     - output.elasticsearch.hosts=["my_elastic01:${ELASTIC_PORT}"]
 volumes:
   certs:
     driver: local
