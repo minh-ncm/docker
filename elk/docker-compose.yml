@@ -191,6 +191,7 @@ services:
     image: docker.elastic.co/logstash/logstash:${STACK_VERSION}
     container_name: my_logstash
     ports:
+      - 9680:9680 # http port for logstash
       - ${LOGSTASH_PORT}:9600
     volumes:
       - ./logstash.conf:/etc/logstash/conf.d/logstash.conf
