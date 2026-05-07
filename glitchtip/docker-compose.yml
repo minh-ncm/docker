@@ -2,7 +2,7 @@ services:
   web:
     image: glitchtip/glitchtip:6 # Check https://glitchtip.com/blog/ for new major versions
     ports:
-      - "9001:9001"
+      - "9001:8000"
     env_file:
       - .env
     environment:
