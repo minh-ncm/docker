@@ -1,0 +1,13 @@
+services:
+  password-manager:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      DOMAIN: "https://password.minhlabs.com"
+      SIGNUPS_ALLOWED: "false"
+      ADMIN_TOKEN: "vaultwardenminhlabs"
+    volumes:
+      - ./vw-data/:/data/
+    ports:
+      - 8020:80
